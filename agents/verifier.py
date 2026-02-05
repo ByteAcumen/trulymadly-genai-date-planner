@@ -1,5 +1,4 @@
-import os
-from openai import OpenAI
+from llm import get_openai_client
 from schemas.models import DatePlan, WeatherData, PlaceData
 from typing import Dict, List
 
@@ -11,10 +10,8 @@ class VerifierAgent:
     """
     
     def __init__(self):
-        api_key = os.getenv('OPENAI_API_KEY')
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY not set")
-        self.client = OpenAI(api_key=api_key)
+        self.client = get_openai_client()
+
     
     async def verify(self, execution_data: Dict) -> DatePlan:
         """

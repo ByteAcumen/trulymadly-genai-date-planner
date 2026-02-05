@@ -72,6 +72,8 @@ See `.env.example` for the template.
 
 ### Running Locally
 
+**Option 1: API Server** (recommended for testing multiple requests)
+
 ```bash
 uvicorn main:app
 ```
@@ -80,6 +82,14 @@ The server starts at `http://localhost:8000`
 
 - **API Docs**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/health
+
+**Option 2: CLI** (direct command-line usage)
+
+```bash
+python cli.py "Plan a romantic dinner in Mumbai"
+```
+
+The CLI runs the complete multi-agent flow without starting a server.
 
 ## Integrated APIs
 
@@ -152,6 +162,7 @@ curl -X POST http://localhost:8000/plan \
 ```
 trulymadly-genai-date-planner/
 ├── main.py                 # FastAPI application
+├── cli.py                  # CLI interface
 ├── requirements.txt        # Dependencies
 ├── .env.example           # Environment template
 ├── .gitignore
@@ -161,6 +172,9 @@ trulymadly-genai-date-planner/
 │   ├── planner.py        # Intent parser
 │   ├── executor.py       # API orchestrator
 │   └── verifier.py       # Validation & generation
+│
+├── llm/                   # LLM client abstraction
+│   └── openai_client.py  # Centralized OpenAI client
 │
 ├── tools/                 # External API wrappers
 │   ├── weather.py        # OpenWeatherMap client
